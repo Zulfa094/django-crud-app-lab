@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete Album</h1>
+
+    <div class="card">
+        <div class="card-content">
+            <h4>Are you sure you want to delete <span class="teal-text">{{ object.title }}</span>?</h4>
+            <p>This will also remove all associated tracks from this album.</p>
+        </div>
+        <div class="card-action">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Yes - Delete!" class="btn red">
+                <a href="{% url 'album-detail' album.id %}" class="btn">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

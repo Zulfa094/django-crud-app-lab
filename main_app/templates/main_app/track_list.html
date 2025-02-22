@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Track List</h1>
+
+<div class="row">
+    {% for track in track_list %}
+    <div class="col s12 m6 l4">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ track.title }}</span>
+                <p>Duration: {{ track.duration }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'track-detail' track.id %}" class="btn btn-track">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col s12">
+        <div class="card-panel">
+            <span>No tracks have been added yet.</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

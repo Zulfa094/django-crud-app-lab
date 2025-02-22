@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Track Created Successfully!</h1>
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ track.title }}</span>
+        <p>Duration: {{ track.duration }}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <h3>Add to Album</h3>
+        {% if albums %}
+            <div class="row">
+                {% for album in albums %}
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">{{ album.title }}</span>
+                                <p>Artist: {{ album.artist }}</p>
+                                <p>Year: {{ album.year }}</p>
+                            </div>
+                            <div class="card-action">
+                                <form action="{% url 'associate-track' album.id track.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-track">Add to this Album</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No albums available. <a href="{% url 'album-create' %}" class="btn btn-track">Create an album</a> first.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card-action center-align">
+    <a href="{% url 'track-detail' track.id %}" class="btn btn-track">Skip - View Track Details</a>
+</div>
+{% endblock %}

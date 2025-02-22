@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete Track</h1>
+
+    <div class="card">
+        <div class="card-content">
+            <h4>Are you sure you want to delete <span class="teal-text">{{ object.title }}</span>?</h4>
+        </div>
+        <div class="card-action">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Yes - Delete!" class="btn red">
+                <a href="{% url 'track-detail' track.id %}" class="btn">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

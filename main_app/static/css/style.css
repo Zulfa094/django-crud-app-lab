@@ -1,0 +1,122 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+main {
+  flex: 1 0 auto;
+  padding: 25px;
+}
+
+nav {
+  background-color: #343a40;
+}
+
+footer.page-footer {
+  padding-top: 0;
+  text-align: right;
+  background-color: #343a40;
+}
+
+.card {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+.card-title {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-action {
+  padding: 16px;
+  border-top: 1px solid #eee;
+}
+
+.btn, .btn-small {
+  margin: 5px;
+  background-color: #343a40;
+  color: white;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover, .btn-small:hover {
+  background-color: #495057;
+}
+
+.btn-track {
+  background-color: #495057;
+  color: white !important;
+}
+
+.btn-track:hover {
+  background-color: #6c757d;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #343a40;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+/* Card grid layout */
+.row {
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+}
+
+/* Form styles */
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=number]:not(.browser-default),
+textarea.materialize-textarea {
+  border-bottom: 1px solid #ced4da;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #343a40;
+  box-shadow: 0 1px 0 0 #343a40;
+}
+
+/* Navigation links */
+nav .brand-logo {
+  font-weight: 500;
+  padding: 0 15px;
+}
+
+nav ul a {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+/* Messages and alerts */
+.card-panel {
+  border-radius: 4px;
+  margin: 0.5rem 0 1rem 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+/* Responsive text */
+@media only screen and (max-width: 600px) {
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.5rem; }
+}

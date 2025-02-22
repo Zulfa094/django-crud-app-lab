@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Album Details</h1>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ album.title }}</span>
+                <p>Artist: {{ album.artist }}</p>
+                <p>Year: {{ album.year }}</p>
+                <p>Description: {{ album.description }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'album-update' album.id %}" class="btn">Edit</a>
+                <a href="{% url 'album-delete' album.id %}" class="btn">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s6">
+        <h3>Tracks</h3>
+        {% if album.tracks.all %}
+            <div class="row">
+                {% for track in album.tracks.all %}
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">{{ track.title }}</span>
+                                <p>Duration: {{ track.duration }}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="{% url 'track-detail' track.id %}" class="btn-small">View Track</a>
+                                <form action="{% url 'remove-track' album.id track.id %}" method="POST" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-small red">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card-panel">
+                <span>No tracks added to this album yet.</span>
+            </div>
+        {% endif %}
+
+        <h3>Add a Track</h3>
+        <div class="card-action" style="margin-bottom: 20px;">
+            <a href="{% url 'create-track-for-album' album.id %}" class="btn">Create New Track for this Album</a>
+        </div>
+        {% if tracks %}
+            <div class="row">
+                {% for track in tracks %}
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">{{ track.title }}</span>
+                                <p>Duration: {{ track.duration }}</p>
+                            </div>
+                            <div class="card-action">
+                                <form action="{% url 'associate-track' album.id track.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-small">Add to Album</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card-panel">
+                <span>No tracks available to add. <a href="{% url 'track-create' %}" class="btn-small">Create a new track</a></span>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="col s6">
+        <h3>Listening History</h3>
+        <div class="card">
+            <div class="card-content">
+                <form action="{% url 'add-listen' album.id %}" method="POST">
+                    {% csrf_token %}
+                    {{ listen_form.as_p }}
+                    <input type="submit" class="btn" value="Add Listen">
+                </form>
+            </div>
+        </div>
+
+        {% if album.listen_set.all %}
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for listen in album.listen_set.all %}
+                    <tr>
+                        <td>{{listen.date}}</td>
+                        <td>{{listen.get_time_display}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="card-panel">
+                <span>No listening history yet. Add your first listen!</span>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

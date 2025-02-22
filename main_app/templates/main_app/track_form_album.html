@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Add Track to {{ album.title }}</h1>
+
+    <div class="card">
+        <div class="card-content">
+            <form action="{% url 'create-track-for-album' album.id %}" method="POST">
+                {% csrf_token %}
+                <div class="input-field">
+                    <input type="text" name="title" id="title" required>
+                    <label for="title">Track Title</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" name="duration" id="duration" required>
+                    <label for="duration">Duration (e.g., 3:45)</label>
+                </div>
+                <button type="submit" class="btn">Add Track</button>
+                <a href="{% url 'album-detail' album.id %}" class="btn red">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
